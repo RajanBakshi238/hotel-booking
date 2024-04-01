@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsInt,
   IsNotEmpty,
+  IsNumber,
   IsString,
   Matches,
   MinLength,
@@ -16,25 +17,31 @@ export class CreateUserDto {
   @IsString()
   @MinLength(2, { message: 'Name must have atleast 2 characters.' })
   @IsNotEmpty()
-  name: string;
+  fullName: string;
 
-  @IsNotEmpty()
-  @MinLength(3, { message: 'Username must have atleast 3 characters.' })
-  @IsAlphanumeric(null, {
-    message: 'Username does not allow other than alpha numeric chars.',
-  })
-  username: string;
+  // @IsNotEmpty()
+  // @MinLength(3, { message: 'Username must have atleast 3 characters.' })
+  // @IsAlphanumeric(null, {
+  //   message: 'Username does not allow other than alpha numeric chars.',
+  // })
+  // username: string;
 
   @IsNotEmpty()
   @IsEmail(null, { message: 'Please provide valid Email.' })
   email: string;
 
-  @IsInt()
-  age: number;
+  // @IsInt()
+  // age: number;
 
-  @IsString()
-  @IsEnum(['female', 'male', 'unspecified'])
-  gender: string;
+  @IsInt()
+  dialCode: number;
+  
+  @IsNumber()
+  phoneNumber: number;
+
+  // @IsString()
+  // @IsEnum(['female', 'male', 'unspecified'])
+  // gender: string;
 
   @IsNotEmpty()
   @Matches(passwordRegEx, {

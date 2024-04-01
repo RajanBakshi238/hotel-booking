@@ -13,12 +13,10 @@ export class UserService {
 
   create(createUserDto: CreateUserDto) {
     const user: User = new User();
-    user.name = createUserDto.name;
-    user.age = createUserDto.age;
+    user.fullName = createUserDto.fullName;
     user.email = createUserDto.email;
-    user.username = createUserDto.username;
     user.password = createUserDto.password;
-    user.gender = createUserDto.gender;
+    // user.gender = createUserDto.gender;
 
     return this.userRepository.save(user);
   }
@@ -31,16 +29,16 @@ export class UserService {
     return this.userRepository.findOneBy({ id });
   }
 
-  updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    const user: User = new User();
-    user.name = updateUserDto.name;
-    user.age = updateUserDto.age;
-    user.email = updateUserDto.email;
-    user.username = updateUserDto.username;
-    user.password = updateUserDto.password;
-    user.id = id;
-    return this.userRepository.save(user);
-  }
+  // updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+  //   const user: User = new User();
+  //   user.name = updateUserDto.name;
+  //   user.age = updateUserDto.age;
+  //   user.email = updateUserDto.email;
+  //   user.username = updateUserDto.username;
+  //   user.password = updateUserDto.password;
+  //   user.id = id;
+  //   return this.userRepository.save(user);
+  // }
 
   remove(id: number): Promise<{ affected?: number }> {
     return this.userRepository.delete(id);

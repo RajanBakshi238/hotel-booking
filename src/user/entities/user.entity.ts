@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { RolesEnum } from 'src/types/RolesEnum';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -6,21 +13,44 @@ export class User {
   id: number;
 
   @Column({ type: 'varchar', length: 30 })
-  name: string;
-
-  @Column({ type: 'varchar', length: 15 })
-  username: string;
+  fullName: string;
 
   @Column({ type: 'varchar', length: 40 })
   email: string;
 
   @Column({ type: 'int' })
-  age: number;
+  dialCode: number;
+
+  @Column({ type: 'int' })
+  phoneNumber: number;
+
+  // @Column({ type: 'int' })
+  // completePhoneNumber: number;
 
   @Column({ type: 'varchar' })
   password: string;
 
-  @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'] })
-  gender: string;
-}
+  // @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'] })
+  // gender: string;
 
+  @Column({ type: 'varchar' })
+  designation: string;
+
+  @Column({ type: 'enum', enum: RolesEnum, default: RolesEnum.ADMIN })
+  type: string;
+
+  @CreateDateColumn({ name: 'createdAt' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updatedAt' })
+  updatedAt: Date;
+
+  @Column({ type: 'boolean', default: false })
+  isVerified: boolean;
+
+  @Column({ type: 'boolean', default: false })
+  isDeleted: boolean;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
+}
