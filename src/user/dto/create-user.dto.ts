@@ -2,6 +2,7 @@ import {
   IsAlphanumeric,
   IsEmail,
   IsEnum,
+  IsIn,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -9,6 +10,7 @@ import {
   Matches,
   MinLength,
 } from 'class-validator';
+import { RolesEnum } from 'src/types/RolesEnum';
 
 const passwordRegEx =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$/;
@@ -39,9 +41,9 @@ export class CreateUserDto {
   @IsNumber()
   phoneNumber: number;
 
-  // @IsString()
-  // @IsEnum(['female', 'male', 'unspecified'])
-  // gender: string;
+  @IsString()
+  @IsEnum(['female', 'male', 'unspecified'])
+  gender: string;
 
   @IsNotEmpty()
   @Matches(passwordRegEx, {
@@ -52,4 +54,14 @@ export class CreateUserDto {
     one special character`,
   })
   password: string;
+
+  @IsNotEmpty()
+  @IsString()
+  designation: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsIn([RolesEnum.ADMIN, RolesEnum.USER, RolesEnum.VENDOR])
+  type: string
+
 }

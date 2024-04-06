@@ -16,7 +16,10 @@ export class UserService {
     user.fullName = createUserDto.fullName;
     user.email = createUserDto.email;
     user.password = createUserDto.password;
-    // user.gender = createUserDto.gender;
+    user.dialCode = createUserDto.dialCode;
+    user.designation = createUserDto.designation;
+    user.phoneNumber = createUserDto.phoneNumber;
+    user.gender = createUserDto.gender;
 
     return this.userRepository.save(user);
   }

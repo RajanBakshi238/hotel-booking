@@ -21,7 +21,7 @@ export class User {
   @Column({ type: 'int' })
   dialCode: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'bigint' })
   phoneNumber: number;
 
   // @Column({ type: 'int' })
@@ -30,8 +30,8 @@ export class User {
   @Column({ type: 'varchar' })
   password: string;
 
-  // @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'] })
-  // gender: string;
+  @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'] })
+  gender: string;
 
   @Column({ type: 'varchar' })
   designation: string;
