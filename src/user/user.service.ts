@@ -14,7 +14,7 @@ export class UserService {
   create(createUserDto: CreateUserDto) {
     const user: User = new User();
     // user.fullName = createUserDto.fullName;
-    user.name = createUserDto.name
+    user.fullName = createUserDto.name
     user.email = createUserDto.email;
     user.password = createUserDto.password;
     user.dialCode = createUserDto.dialCode;

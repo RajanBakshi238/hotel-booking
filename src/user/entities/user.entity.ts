@@ -11,12 +11,9 @@ import {
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-
-  // @Column({ type: 'varchar', length: 30 })
-  // fullName: string;
   
   @Column({ type: 'varchar', length: 30, nullable: true })
-  name: string;
+  fullName: string;
 
   @Column({ type: 'varchar', length: 40 })
   email: string;
@@ -27,8 +24,8 @@ export class User {
   @Column({ type: 'bigint' })
   phoneNumber: number;
 
-  // @Column({ type: 'int' })
-  // completePhoneNumber: number;
+  @Column({ type: 'varchar', length: 40 })
+  completePhoneNumber: number;
 
   @Column({ type: 'varchar' })
   password: string;
