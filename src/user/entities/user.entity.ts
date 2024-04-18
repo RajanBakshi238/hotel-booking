@@ -1,4 +1,4 @@
-import { RolesEnum } from 'src/types/RolesEnum';
+import { RolesEnum } from 'src/shared/types/RolesEnum';
 import {
   Column,
   CreateDateColumn,
