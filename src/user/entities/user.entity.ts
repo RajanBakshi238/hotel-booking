@@ -24,16 +24,16 @@ export class User {
   @Column({ type: 'bigint' })
   phoneNumber: number;
 
-  @Column({ type: 'varchar', length: 40 })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   completePhoneNumber: number;
 
   @Column({ type: 'varchar' })
   password: string;
 
-  @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'] })
+  @Column({ type: 'enum', enum: ['male', 'female', 'unspecified'], nullable: true })
   gender: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar'})
   designation: string;
 
   @Column({ type: 'enum', enum: RolesEnum, default: RolesEnum.ADMIN })

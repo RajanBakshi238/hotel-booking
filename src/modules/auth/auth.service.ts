@@ -20,8 +20,11 @@ export class AuthService {
 
   async createVendor(createVendorDto: CreateVendorDto) {
     try {
-      this.userRepository.create(createVendorDto)
+      const res = await this.userRepository.save(createVendorDto)
+      return res
+
     } catch (error) {
+      console.log(error, ">>>>> error")
       throw new HttpException(
         'Something went wrong',
         HttpStatus.INTERNAL_SERVER_ERROR,
