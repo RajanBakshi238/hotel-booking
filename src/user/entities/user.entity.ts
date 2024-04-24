@@ -1,3 +1,4 @@
+import { BaseEntity } from 'src/shared/entities/base.entity';
 import { RolesEnum } from 'src/shared/types/RolesEnum';
 import {
   Column,
@@ -8,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
   
@@ -39,18 +40,7 @@ export class User {
   @Column({ type: 'enum', enum: RolesEnum, default: RolesEnum.ADMIN })
   type: string;
 
-  @CreateDateColumn({ name: 'createdAt' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updatedAt' })
-  updatedAt: Date;
-
   @Column({ type: 'boolean', default: false })
   isVerified: boolean;
 
-  @Column({ type: 'boolean', default: false })
-  isDeleted: boolean;
-
-  @Column({ type: 'boolean', default: true })
-  isActive: boolean;
 }
