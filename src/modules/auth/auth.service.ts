@@ -11,6 +11,7 @@ import { CreateVendorDto } from './dto/createVendor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -20,11 +21,12 @@ export class AuthService {
 
   async createVendor(createVendorDto: CreateVendorDto) {
     try {
-      const res = await this.userRepository.save(createVendorDto)
-      return res
-
+      // const entity = plainToClass(User, createVendorDto);   or we can do like this also
+      const entity = Object.assign(new User(), createVendorDto);
+      const res = await this.userRepository.save(entity);
+      return res;
     } catch (error) {
-      console.log(error, ">>>>> error")
+      console.log(error, '>>>>> error');
       throw new HttpException(
         'Something went wrong',
         HttpStatus.INTERNAL_SERVER_ERROR,
