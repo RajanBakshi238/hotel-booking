@@ -7,6 +7,7 @@ import { User } from './user/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { dataSourceOptions } from 'db/data-source';
 import { AuthModule } from './modules/auth/auth.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { AuthModule } from './modules/auth/auth.module';
     ),
 
     UserModule,
-    AuthModule
+    AuthModule,
+    SeedModule
   ],
   controllers: [AppController],
   providers: [AppService],
