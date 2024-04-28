@@ -20,18 +20,36 @@ export class AuthService {
   ) {}
 
   async createVendor(createVendorDto: CreateVendorDto) {
-    try {
+    // try {
+      const userExist = await this.checkUserExist(
+        createVendorDto.email,
+        `${createVendorDto.dialCode}--${createVendorDto.phoneNumber}`,
+      );
+      if(userExist){
+        throw new ConflictException("User already exists with same email or phone")
+      }
+
+      console.log(userExist, ">>>> userExist")
+
       // const entity = plainToClass(User, createVendorDto);   or we can do like this also
       const entity = Object.assign(new User(), createVendorDto);
       const res = await this.userRepository.save(entity);
       return res;
-    } catch (error) {
-      console.log(error, '>>>>> error');
-      throw new HttpException(
-        'Something went wrong',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+    // } catch (error) {
+    //   console.log(error, '>>>>> error');
+    //   throw new HttpException(
+    //     'Something went wrong',
+    //     HttpStatus.INTERNAL_SERVER_ERROR,
+    //   );
+    // }
+  }
+
+  async checkUserExist(email, completePhoneNumber) {
+    const users = this.userRepository.findOne({
+      where: [{ email: email }, { completePhoneNumber: completePhoneNumber }],
+    });
+
+    return users;
   }
 
   create(createAuthDto: CreateAuthDto) {

@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import { IsEmail, IsIn, IsNumber, IsString } from 'class-validator';
+import { formatEmail } from 'src/shared/functions/normalizeString';
 import { RolesEnum } from 'src/shared/types/RolesEnum';
 
 export class CreateVendorDto {
@@ -13,6 +15,9 @@ export class CreateVendorDto {
 
   @ApiProperty()
   @IsEmail({}, { message: 'dialcode should be valid.' })
+  @Transform(({ value }) => {
+    return formatEmail(value);
+  })
   email: string;
 
   @ApiProperty()
