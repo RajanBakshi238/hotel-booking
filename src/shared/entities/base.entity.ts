@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 // @Entity()
 export class BaseEntity {
@@ -13,4 +13,7 @@ export class BaseEntity {
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
+
+  // @PrimaryGeneratedColumn()
+  // id: number;
 }

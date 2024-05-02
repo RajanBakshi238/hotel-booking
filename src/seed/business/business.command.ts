@@ -11,7 +11,7 @@ export class BusinessComand {
   })
   async create() {
     const res = await this.businessService.createBusiness({
-      name: 'restaurants',
+      name: 'saloon & spa',
     });
     console.log(res, 'business detail');
   }
