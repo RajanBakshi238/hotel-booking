@@ -48,6 +48,9 @@ export class User extends BaseEntity {
 
   @Column({ type: 'boolean', default: false })
   isVerified: boolean;
+  
+  @Column({ type: 'boolean', default: false })
+  isTest: boolean;
 
   @BeforeInsert()
   @BeforeUpdate()

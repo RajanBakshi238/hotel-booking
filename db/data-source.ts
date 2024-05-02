@@ -8,8 +8,10 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME ?? "postgres",
   database: process.env.DB_NAME,
   // entities: [User],
-  entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/db/migrations/*.js'],
+  // entities: ['dist/**/*.entity.js'],
+  // migrations: ['dist/db/migrations/*.js'],
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
 //   synchronize: true,
   logging: true,
 };

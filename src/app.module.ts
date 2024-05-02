@@ -4,10 +4,12 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { BusinessEntity } from './modules/business/entities/business-entity';
 import { ConfigModule } from '@nestjs/config';
 import { dataSourceOptions } from 'db/data-source';
 import { AuthModule } from './modules/auth/auth.module';
 import { SeedModule } from './seed/seed.module';
+import { BusinessModule } from './modules/business/business.module';
 
 @Module({
   imports: [
@@ -30,9 +32,10 @@ import { SeedModule } from './seed/seed.module';
       // }
     ),
 
-    UserModule,
+    // UserModule,
     AuthModule,
-    SeedModule
+    SeedModule,
+    BusinessModule
   ],
   controllers: [AppController],
   providers: [AppService],

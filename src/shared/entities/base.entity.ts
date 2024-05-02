@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, UpdateDateColumn } from "typeorm";
 
+// @Entity()
 export class BaseEntity {
   @CreateDateColumn({ name: 'createdAt' })
   createdAt: Date;
