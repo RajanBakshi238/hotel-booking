@@ -1,3 +1,4 @@
+import { VendorDetail } from 'src/modules/vendor-details/entities/vendor-detail.entity';
 import { BaseEntity } from 'src/shared/entities/base.entity';
 import { RolesEnum } from 'src/shared/types/RolesEnum';
 import {
@@ -6,6 +7,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -51,6 +54,10 @@ export class User extends BaseEntity {
   
   @Column({ type: 'boolean', default: false })
   isTest: boolean;
+
+  @OneToOne(() => VendorDetail)
+  @JoinColumn()
+  vendorDetail: VendorDetail
 
   @BeforeInsert()
   @BeforeUpdate()
