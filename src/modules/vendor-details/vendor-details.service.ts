@@ -1,11 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateVendorDetailDto } from './dto/create-vendor-detail.dto';
 import { UpdateVendorDetailDto } from './dto/update-vendor-detail.dto';
+import { plainToClass } from 'class-transformer';
+import { VendorDetail } from './entities/vendor-detail.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class VendorDetailsService {
-  create(createVendorDetailDto: CreateVendorDetailDto) {
-    return 'This action adds a new vendorDetail';
+  constructor(
+    @InjectRepository(VendorDetail)
+    private vendorDetailRepository: Repository<VendorDetail>,
+  ) {}
+
+  async create(createVendorDetailDto: CreateVendorDetailDto) {
+    try {
+      const entity = plainToClass(VendorDetail, createVendorDetailDto);
+      const res = await this.vendorDetailRepository.save(entity);
+      return res;
+    } catch (error) {
+      return new InternalServerErrorException('');
+    }
   }
 
   findAll() {
