@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { BusinessService } from './business.service';
 import { CreateBusinessDto } from './dto/createBusiness.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -12,8 +12,14 @@ export class BusinessController {
   constructor(private readonly businessService: BusinessService) {}
 
 
-  @Post('create-vendor')
-  createVendor(@Body() createVendorDto: CreateBusinessDto) {
-    return this.businessService.createBusiness(createVendorDto);
+  // @Post('create-vendor')
+  // createVendor(@Body() createVendorDto: CreateBusinessDto) {
+  //   return this.businessService.createBusiness(createVendorDto);
+  // }
+
+  @Get()
+  getBusiness(){
+    return this.businessService.getAllBusiness()
   }
+
 }

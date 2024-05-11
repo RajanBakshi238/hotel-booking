@@ -13,7 +13,11 @@ export class BusinessService {
 
   async createBusiness(business: CreateBusinessDto) {
     const res = await this.businessRepository.save(business);
-    console.log(res, '>>>>>>> response');
     return res;
+  }
+
+  async getAllBusiness(){
+    const res = await this.businessRepository.find()
+    return res
   }
 }
