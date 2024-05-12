@@ -12,6 +12,7 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateVendorDto } from './dto/createVendor.dto';
+import { LoginInputDto } from './dto/login-input.dto';
 
 @ApiTags('Auth')
 @Controller({
@@ -24,6 +25,11 @@ export class AuthController {
   @Post('create-vendor')
   createVendor(@Body() createVendorDto: CreateVendorDto) {
     return this.authService.createVendor(createVendorDto);
+  }
+
+  @Post('login')
+  authenticate(@Body() loginInputDto: LoginInputDto ){
+    return this.authService.authenticate(loginInputDto)
   }
 
   // @Post()
