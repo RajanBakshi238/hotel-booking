@@ -5,6 +5,7 @@ import { plainToClass } from 'class-transformer';
 import { VendorDetail } from './entities/vendor-detail.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class VendorDetailsService {
@@ -13,7 +14,7 @@ export class VendorDetailsService {
     private vendorDetailRepository: Repository<VendorDetail>,
   ) {}
 
-  async create(createVendorDetailDto: CreateVendorDetailDto) {
+  async create(createVendorDetailDto: CreateVendorDetailDto, user: User) {
     try {
       const entity = plainToClass(VendorDetail, createVendorDetailDto);
       const res = await this.vendorDetailRepository.save(entity);

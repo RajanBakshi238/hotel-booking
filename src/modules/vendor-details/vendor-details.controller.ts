@@ -1,15 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { VendorDetailsService } from './vendor-details.service';
 import { CreateVendorDetailDto } from './dto/create-vendor-detail.dto';
 import { UpdateVendorDetailDto } from './dto/update-vendor-detail.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('vendor-details')
 export class VendorDetailsController {
   constructor(private readonly vendorDetailsService: VendorDetailsService) {}
 
+  @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createVendorDetailDto: CreateVendorDetailDto) {
-    return this.vendorDetailsService.create(createVendorDetailDto);
+  create(@Request() req, @Body() createVendorDetailDto: CreateVendorDetailDto) {
+    return this.vendorDetailsService.create(createVendorDetailDto, req.user);
   }
 
   @Get()
@@ -23,7 +35,10 @@ export class VendorDetailsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVendorDetailDto: UpdateVendorDetailDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateVendorDetailDto: UpdateVendorDetailDto,
+  ) {
     return this.vendorDetailsService.update(+id, updateVendorDetailDto);
   }
 
