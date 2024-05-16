@@ -18,13 +18,14 @@ import * as bcrypt from 'bcrypt';
 import { plainToClass } from 'class-transformer';
 import { LoginInputDto } from './dto/login-input.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateVendorDto } from './dto/updateVendor.dto';
 
 const saltOrRounds = 10;
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   logger = new Logger(AuthService.name);
@@ -60,6 +61,14 @@ export class AuthService {
     // }
   }
 
+  async updateVendor(id: number, updateVendorDto: UpdateVendorDto) {
+    try{
+      const updatedResponse = await this.userRepository.update(id, updateVendorDto)
+    }catch(error){
+      throw new InternalServerErrorException()
+    }
+  }
+
   // To check user exist with this email or phone number
   async checkUserExist(email, completePhoneNumber) {
     const users = this.userRepository.findOne({
@@ -74,18 +83,20 @@ export class AuthService {
       const user = await this.userRepository.findOne({
         where: [{ email: loginInputDto.email, isDeleted: false }],
       });
-      if(!user){
-        throw new NotFoundException("User not found with this email.")
+      if (!user) {
+        throw new NotFoundException('User not found with this email.');
       }
 
-      const isMatch = await bcrypt.compare(loginInputDto.password, user.password)
-      if(!isMatch){
-        throw new BadRequestException("Invalid credentials.")
+      const isMatch = await bcrypt.compare(
+        loginInputDto.password,
+        user.password,
+      );
+      if (!isMatch) {
+        throw new BadRequestException('Invalid credentials.');
       }
-      const accessToken = await this.jwtService.signAsync({...user})
+      const accessToken = await this.jwtService.signAsync({ ...user });
 
-      return {user, accessToken};
-
+      return { user, accessToken };
     } catch (err) {
       this.logger.error('Error while logging', err);
       throw new InternalServerErrorException();

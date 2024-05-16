@@ -28,14 +28,14 @@ export class CreateVendorDto {
   @IsString({ message: 'password is required.' })
   password: string;
 
-  @ApiProperty()
-  @IsString({ message: 'role is required.' })
-  @IsIn([RolesEnum.USER, RolesEnum.VENDOR], {
-    message: 'Roles must be either user or vendor',
-  })
-  role: string;
+  // @ApiProperty()
+  // @IsString({ message: 'role is required.' })
+  // @IsIn([RolesEnum.USER, RolesEnum.VENDOR], {
+  //   message: 'Roles must be either user or vendor',
+  // })
+  // role: string;
 
-  @ApiProperty()
-  @IsString()
-  designation: string;
+  // @ApiProperty()
+  // @IsString()
+  // designation: string;
 }
